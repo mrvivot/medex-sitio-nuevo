@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedí tu presupuesto - Medicall Express</title>
+  <meta name="keywords" content="protección médica instituciones, colegios, atención médica escolar, Pilar, Tortuguitas, Buenos Aires Provincia, contrato, presupuesto, prestación de servicio, MEDEX.">
+  <meta name="description" content="Rellená el formulario con los datos de la institución y te acercaremos un contrato de prestación de servicio.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/presupuestos.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a href="index.html" class="site-header__logo" aria-label="MEDEX - Inicio">
+        <img src="img/logo-medex.png" alt="MEDEX">
+      </a>
+      <nav class="site-header__nav" aria-label="Navegación principal">
+        <a href="servicios.html">Servicios</a>
+        <a href="presupuestos.html">Presupuestos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero-quote">
+      <div class="hero-quote__inner container">
+        <h1 class="hero-quote__title">Presupuestos</h1>
+        <p class="hero-quote__subtitle">En el formulario de abajo te detallamos qué datos necesitamos de tu institución para poder brindarte el mejor servicio</p>
+      </div>
+    </section>
+
+    <section class="budget">
+      <div class="budget__inner container">
+        <form class="budget-form" id="form-presupuesto" name="form_contacto" action="mail/presupuesto_envio.php" method="POST" novalidate>
+
+          <div class="form-field">
+            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder=" " required>
+            <label for="nombre">Nombre y apellido</label>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="nombre_empresa" name="nombre_empresa" autocomplete="organization" placeholder=" " required>
+            <label for="nombre_empresa">Nombre de la empresa</label>
+          </div>
+
+          <div class="form-field">
+            <input type="email" id="mail" name="mail" autocomplete="email" placeholder=" " required>
+            <label for="mail">Email</label>
+          </div>
+
+          <div class="form-field">
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder=" " required>
+            <label for="telefono">Teléfono</label>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="rubro" name="rubro" placeholder=" " required>
+            <label for="rubro">Rubro</label>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="direccion" name="direccion" autocomplete="street-address" placeholder=" ">
+            <label for="direccion">Dirección <span class="optional">(opcional)</span></label>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="horario" name="horario" placeholder=" ">
+            <label for="horario">Horario de atención <span class="optional">(opcional)</span></label>
+            <p class="form-field__hint">Ej: Lunes a viernes de 8 a 17hs</p>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="empleados" name="empleados" placeholder=" ">
+            <label for="empleados">Cantidad de empleados <span class="optional">(opcional)</span></label>
+          </div>
+
+          <div class="form-field form-field--full">
+            <textarea id="comentarios" name="comentarios" placeholder=" "></textarea>
+            <label for="comentarios">Comentarios <span class="optional">(opcional)</span></label>
+          </div>
+
+          <div class="form-field form-field--full">
+            <div class="g-recaptcha" data-sitekey="6LcbP88tAAAAAPAcVSfjeuKg5WTih8RDob_bAubF" data-size="compact"></div>
+          </div>
+
+          <div class="budget-form__submit">
+            <button type="submit" class="btn btn--primary">Enviar presupuesto</button>
+            <div class="form-status" id="form-presupuesto-status" role="status" aria-live="polite"></div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="MEDEX - Inicio">
+          <span class="site-footer__brand-m">M</span><span class="site-footer__brand-edex">EDEX</span>
+        </a>
+        <nav class="site-footer__nav" aria-label="Navegación de pie de página">
+          <a href="servicios.html">Servicios</a>
+          <a href="presupuestos.html">Presupuestos</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+      <nav class="site-footer__social" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/medicallexpress" target="_blank" rel="noopener noreferrer" aria-label="Instagram de MEDEX">
+          <img src="img/icons/instagram.svg" alt="" width="24" height="24">
+        </a>
+        <a href="https://www.facebook.com/medicallexpress" target="_blank" rel="noopener noreferrer" aria-label="Facebook de MEDEX">
+          <img src="img/icons/facebook.svg" alt="" width="24" height="24">
+        </a>
+      </nav>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5491124669726" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chatear por WhatsApp">
+    <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false">
+      <path fill="#ffffff" d="M16.004 3C9.376 3 4 8.373 4 15c0 2.29.638 4.428 1.744 6.25L4 29l7.938-1.703A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7a9.62 9.62 0 0 1-4.9-1.345l-.352-.21-4.71 1.01 1.006-4.59-.23-.365A9.61 9.61 0 0 1 6.3 15c0-5.352 4.353-9.7 9.704-9.7S25.7 9.648 25.7 15s-4.344 9.7-9.696 9.7zm5.325-7.276c-.29-.145-1.716-.847-1.982-.944-.266-.096-.46-.145-.653.146-.193.29-.75.943-.92 1.137-.17.193-.34.217-.63.072-.29-.145-1.224-.451-2.332-1.437-.862-.768-1.444-1.716-1.613-2.006-.169-.29-.018-.447.127-.591.13-.13.29-.34.435-.51.145-.169.193-.29.29-.483.096-.193.048-.362-.024-.507-.072-.145-.653-1.573-.895-2.153-.236-.567-.475-.49-.653-.5l-.556-.01a1.07 1.07 0 0 0-.775.362c-.266.29-1.016.993-1.016 2.42s1.04 2.808 1.185 3.001c.145.193 2.048 3.127 4.963 4.386.694.3 1.235.48 1.657.615.696.221 1.33.19 1.83.115.558-.083 1.716-.7 1.958-1.377.242-.677.242-1.257.169-1.377-.072-.12-.266-.193-.556-.338z"/>
+    </svg>
+  </a>
+
+  <nav class="bottom-nav" aria-label="Navegación mobile">
+    <ul class="bottom-nav__list">
+      <li><a href="index.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 9.5V21H19V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.5 21V14H14.5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Inicio</span>
+      </a></li>
+      <li><a href="servicios.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Servicios</span>
+      </a></li>
+      <li><a href="presupuestos.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 3H14L18 7V21H7V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 3V7H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 12H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 15.5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 9H11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Presupuestos</span>
+      </a></li>
+      <li><a href="nosotros.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="9" cy="7.5" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2.5 20C2.5 16.5 5.2 14 9 14C12.8 14 15.5 16.5 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="17" cy="8.5" r="2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15.3 14.2C18.2 14.6 20.3 16.6 20.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Nosotros</span>
+      </a></li>
+      <li><a href="contacto.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 5H20V19H4V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 6.5L12 13L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Contacto</span>
+      </a></li>
+    </ul>
+  </nav>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="js/main.js"></script>
+  <script src="js/presupuestos.js"></script>
+</body>
+</html>

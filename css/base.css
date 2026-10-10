@@ -1,0 +1,342 @@
+/*
+  MEDEX — Sistema de diseño base
+  Fuente: Figma (fileKey OcM4NjBeGri1GY4oBVMgdX, node 0:1)
+  Contiene únicamente tokens (variables) y un reset mínimo.
+  El contenido/layout de cada página se implementa en hojas de estilo aparte.
+*/
+
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
+:root {
+  /* --- Color: marca --- */
+  --color-blue: #4b64ab;          /* MEDEX azul (logo "M", acentos, bordes de botón secundario) */
+  --color-blue-deep: #3053b6;     /* azul alternativo (botón outline en hero de /servicios; base de --color-bg-tint-blue) */
+  --color-navy: #08267a;          /* texto oscuro sobre fondo naranja (botón de /servicios) */
+  --color-orange: #f6863a;        /* MEDEX naranja (logo "EDEX", CTA primario) */
+  --color-orange-light: rgba(255, 185, 137, 0.9); /* fondo de botón secundario sobre CTA flotante */
+
+  /* --- Color: neutros --- */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-text: var(--color-black);
+  --color-text-muted: rgba(0, 0, 0, 0.55);   /* párrafos secundarios, descripciones */
+  --color-text-muted-alt: #5F6470; /* bajada del hero — valor real de Figma (antes #5B5F6B, aproximado); sigue pasando AA sobre fondo claro/mesh */
+
+  /* --- Color: bordes y superficies --- */
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+
+  /* --- Color: fondos de sección --- */
+  --color-bg: var(--color-white);
+  --color-bg-tint-blue: rgba(48, 83, 182, 0.16);   /* hero / franjas destacadas */
+  --color-bg-tint-blue-transparent: rgba(48, 83, 182, 0); /* extremo de degradés con --color-bg-tint-blue */
+
+  /* --- Color: estados --- */
+  --color-orange-hover: #e2762b; /* ~10% más oscuro que --color-orange, hover de botón primario */
+  --color-blue-hover: #3e538f;   /* ~10% más oscuro que --color-blue, hover de botón outline */
+  --color-focus-ring: #3053b6;   /* outline de foco visible por teclado en todos los interactivos */
+
+  /* --- Sombra --- */
+  --shadow-card: 0px 4px 8px 0px rgba(0, 0, 0, 0.02), 0px 6px 12px 0px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0px 2px 12.8px 0px rgba(0, 0, 0, 0.05), 0px 8px 32px 0px rgba(0, 0, 0, 0.08); /* mockup del hero de /servicios */
+  --shadow-header: 0px 2px 8px rgba(0, 0, 0, 0.06); /* header sticky al hacer scroll */
+
+  /* --- Motion --- */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Tipografía: familia y pesos --- */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* --- Tipografía: tamaños (desktop / tablet) ---
+     Se ajustan a mobile mediante los tokens --fs-*-mobile y una media query abajo. */
+  --fs-logo: 56px;         /* wordmark "MEDEX" en encabezado */
+  --fs-logo-compact: 20px; /* wordmark en pie de página / CTA flotante */
+  --fs-display: 64px;      /* H1 de hero */
+  --fs-heading: 24px;      /* H5 / títulos de tarjeta, bajada de hero */
+  --fs-body-lg: 18px;      /* texto de tarjeta, botones */
+  --fs-body: 16px;         /* nav, botones secundarios, texto de beneficios */
+
+  /* --- Tipografía: "frases destacadas" (services-intro / highlight) ---
+     Antes hardcodeadas (28px suelto; clamp(28px,5vw,40px) suelto). Mobile y
+     tablet comparten tamaño (son el mismo tipo de elemento); en desktop se
+     diferencian a propósito: services-intro va más chico porque convive con
+     un H1 arriba, highlight es un pull-quote más grande y solo. */
+  --fs-lead-mobile: 22px;
+  --fs-lead-tablet: 28px;
+  --fs-lead-desktop: 24px;    /* services-intro: antes 28px, bajamos para que no compita con el H1 */
+  --fs-lead-desktop-lg: 40px; /* highlight (≥1280): valor real de Figma — techo del clamp original pre-rediseño */
+
+  /* --- Tipografía: tamaños (mobile, <768px) --- */
+  --fs-logo-mobile: 40px;
+  --fs-display-mobile: 34px;
+
+  /* --- Tipografía: interlineado --- */
+  --lh-tight: 1.1;
+  --lh-snug: 1.4;
+  --lh-normal: 1.45;
+  --lh-relaxed: 1.5;
+
+  /* --- Tipografía: tracking --- */
+  --tracking-display: -1.28px;
+  --tracking-display-mobile: -0.88px;
+  --tracking-logo: -1.68px;
+  --tracking-heading: -0.48px;
+  --tracking-body-lg: -0.09px;
+  --tracking-body: -0.08px;
+
+  /* --- Espaciado (escala base 8px) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+  --space-11: 120px;
+
+  /* --- Radios --- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* --- Layout / breakpoints ---
+     Referencia de frames en Figma: Mobile 375, Tablet 800, Desktop 1280.
+     Mismo padding lateral de contenedor en tablet y desktop (64px). */
+  --container-max-width: 1280px;
+  --container-padding-mobile: var(--space-5);  /* 24px, <768px */
+  --container-padding-tablet: var(--space-9);  /* 64px, 768–1279px */
+  --container-padding-desktop: var(--space-9); /* 64px, >=1280px */
+
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
+
+  /* --- Bottom nav (mobile) --- */
+  --bottom-nav-height: 64px;
+}
+
+/* ==========================================================================
+   Reset mínimo
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: var(--lh-normal);
+  overflow-wrap: break-word; /* evita overflow horizontal con emails/URLs largos sin espacios */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Foco visible por teclado en todos los interactivos (Design System v2) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Contenedor
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+/* ==========================================================================
+   Tipografía responsive (tokens que cambian por breakpoint)
+   ========================================================================== */
+@media (max-width: 767px) {
+  :root {
+    --fs-logo: var(--fs-logo-mobile);
+    --fs-display: var(--fs-display-mobile);
+    --tracking-display: var(--tracking-display-mobile);
+  }
+}
+
+/* ==========================================================================
+   Fondo mesh global — Design System v2, todo el sitio.
+   Capa fija vía pseudo-elementos (position: fixed, NO background-attachment:
+   fixed — da jank en mobile Safari/Chrome Android). body pasa a transparente
+   para que se vea a través de las secciones sin fondo propio; html mantiene
+   un bg opaco de respaldo (actúa como "canvas", pinta antes que los blobs de
+   z-index negativo, así que no los tapa — ver nota en el reporte de cierre).
+   Las secciones que deben quedar opacas (panel de logos, footer) llevan su
+   propio background-color explícito y no se ven afectadas por esto.
+   ========================================================================== */
+html {
+  background-color: var(--color-bg);
+}
+
+body {
+  background-color: transparent;
+}
+
+html::before,
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Blob 1 — navy, esquina superior izquierda */
+html::before {
+  top: -12%;
+  left: -10%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 520px;
+  max-height: 520px;
+  background-color: var(--color-navy);
+  opacity: 0.14;
+  animation: mesh-blob-a 22s ease-in-out infinite alternate;
+}
+
+/* Blob 2 — naranja, esquina inferior derecha */
+body::before {
+  bottom: -14%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  background-color: var(--color-orange);
+  opacity: 0.16;
+  animation: mesh-blob-b 26s ease-in-out infinite alternate;
+}
+
+/* Blob 3 — azul, borde derecho, más sutil */
+body::after {
+  top: 18%;
+  right: -14%;
+  width: 36vw;
+  height: 36vw;
+  max-width: 420px;
+  max-height: 420px;
+  background-color: var(--color-blue);
+  opacity: 0.12;
+  animation: mesh-blob-c 18s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-blob-a {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(6%, 5%) scale(1.12); }
+}
+
+@keyframes mesh-blob-b {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-5%, -6%) scale(1.08); }
+}
+
+@keyframes mesh-blob-c {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-6%, 4%) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Scroll-reveal — Fase 5 (motion). js/main.js agrega/saca .is-visible vía
+   IntersectionObserver.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

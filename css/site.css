@@ -1,0 +1,213 @@
+/*
+  MEDEX — Chrome de sitio (header, footer, botón flotante de WhatsApp)
+  Compartido por las 5 páginas. Usa los tokens definidos en base.css.
+*/
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-white);
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+}
+
+.site-header__logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.site-header__logo img {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+/* Oculta en mobile: duplicaba la navegación que ya cubre el bottom nav
+   (mismo breakpoint — 768px — en el que .bottom-nav se activa). */
+.site-header__nav {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  gap: var(--space-4);
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+}
+
+.site-header__nav a {
+  color: var(--color-text);
+}
+
+.site-header__nav a:hover,
+.site-header__nav a.is-active {
+  color: var(--color-orange);
+}
+
+@media (min-width: 768px) {
+  .site-header__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-header__logo img {
+    height: 56px;
+  }
+
+  .site-header__nav {
+    display: flex;
+    gap: var(--space-7);
+  }
+}
+
+/* ==========================================================================
+   Footer — Design System v2, variante navy (decisión cerrada, ver
+   styleguide.html → sección Footer. Único estilo: ya no coexiste con la
+   variante gris clara que estaba en el preview.
+   ========================================================================== */
+.site-footer {
+  background-color: var(--color-navy);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-block: var(--space-9);
+}
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.site-footer__logo {
+  display: block;
+  font-size: var(--fs-logo-compact);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.4px;
+}
+
+/* Wordmark en texto (no el <img> del header): el logo-medex.png trae
+   "MEDEX" en negro horneado en el PNG, ilegible sobre el footer navy. */
+.site-footer__brand-m {
+  color: var(--color-white);
+}
+
+.site-footer__brand-edex {
+  color: var(--color-orange);
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+  color: rgba(255, 255, 255, 0.78); /* sobre --color-navy: ≈7.8:1, AAA */
+}
+
+.site-footer__nav a {
+  color: inherit;
+}
+
+.site-footer__nav a:hover,
+.site-footer__nav a.is-active {
+  color: var(--color-orange);
+}
+
+.site-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.site-footer__social img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  /* instagram.svg/facebook.svg son gris oscuro (pensados para fondo claro);
+     sobre --color-navy quedarían casi invisibles. Se cargan por <img>, así
+     que no se puede recolorear con currentColor — se fuerzan a blanco. */
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.site-footer__social a:hover img {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .site-footer__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-footer__brand {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-9);
+  }
+
+  .site-footer__nav {
+    flex-direction: row;
+    gap: var(--space-6);
+  }
+}
+
+/* ==========================================================================
+   Botón flotante de WhatsApp
+   Mismo patrón que el sitio actual (enlace directo, botón circular fijo).
+   ========================================================================== */
+.whatsapp-float {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: opacity 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Clearance del bottom nav (mobile)
+   El bottom nav es fixed, así que en <768px el <body> necesita este padding
+   para que el contenido y el footer no terminen tapados detrás. También
+   subimos el botón de WhatsApp (fixed, z-index más alto) para que no quede
+   superpuesto con el bottom nav en la esquina inferior derecha.
+   ========================================================================== */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: var(--bottom-nav-height);
+  }
+
+  .whatsapp-float {
+    bottom: calc(var(--bottom-nav-height) + var(--space-3));
+  }
+}

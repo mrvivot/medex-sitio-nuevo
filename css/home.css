@@ -1,0 +1,564 @@
+/*
+  MEDEX — Página Home (index.html)
+  Fuente: Figma (fileKey OcM4NjBeGri1GY4oBVMgdX, node 30:2184)
+*/
+
+/* ==========================================================================
+   Hero — Rediseño 2 columnas (datos reales de Figma). Reemplaza el hero
+   anterior de 4 imágenes en fila por: columna de texto + frame único con
+   crossfade/stepper. 2 columnas solo desde el breakpoint desktop (1280) —
+   520px(texto) + 488px(imagen) + gaps no entran en el frame de tablet (800);
+   <1280 queda apilado en una columna (texto arriba, imagen abajo).
+   ========================================================================== */
+.hero {
+  background-color: transparent;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  padding-block: var(--space-10) var(--space-5);
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.hero__title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  text-align: left;
+}
+
+.hero__title {
+  max-width: 46ch;
+  /* 40px propio de Home — NO var(--fs-display-mobile) (34px, compartido
+     con servicios.css/nosotros.css/components.css, todavía sin rediseñar;
+     subir ese token movería esas páginas fuera de alcance). */
+  font-size: var(--fs-logo-mobile);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display-mobile);
+  color: #111318;
+}
+
+.hero__subtitle {
+  max-width: 484px;
+  font-size: 22px;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-normal);
+  letter-spacing: -0.12px;
+  color: var(--color-text-muted-alt);
+}
+
+.hero__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.hero__buttons .btn--primary,
+.hero__buttons .btn--outline {
+  width: 100%;
+}
+
+/* Secundario: blanco sólido, borde sutil + sombra leve para que se distinga
+   del fondo (blanco sobre blanco/mesh sin esto era ilegible como botón).
+   Compensa 1px de padding por el borde para mantener el mismo alto que el
+   primario (que no tiene borde). */
+.hero__buttons .btn--outline {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid rgba(17, 19, 24, 0.12);
+  padding: calc(var(--space-3) - 1px) calc(var(--space-4) - 1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.hero__buttons .btn--outline:hover {
+  border-color: rgba(17, 19, 24, 0.22);
+}
+
+.hero__media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+}
+
+.hero__frame {
+  position: relative;
+  width: 100%;
+  max-width: 488px;
+  aspect-ratio: 488 / 620;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+}
+
+.hero__frame-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.hero__frame-image.is-active {
+  opacity: 1;
+}
+
+/* Degradé de contraste en la base de la imagen, para que el stepper (ahora
+   adentro del frame) se lea bien sin depender de qué tan clara/oscura sea
+   la foto activa en ese momento. */
+.hero__frame::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.38), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Encuadre puntual — el sujeto queda cargado a la izquierda con el
+   object-position por defecto (50% 50%) en estas 2 imágenes del carrusel. */
+.hero__frame-image[src*="Evento_tenis"] {
+  object-position: 70% 50%;
+}
+
+.hero__frame-image[src*="Evento_Hockey"] {
+  object-position: 60% 50%;
+}
+
+/* Adentro de .hero__frame (ver HTML), centrado sobre el degradé de la base
+   de la imagen en vez de debajo del frame como componente aparte. */
+.hero__stepper {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-5);
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hero__dot {
+  position: relative;
+  overflow: hidden; /* clipea el relleno de progreso (::after) dentro de la forma pill */
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.35);
+  padding: 0;
+  transition: width var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.hero__dot.is-active {
+  width: 28px;
+  background-color: rgba(255, 255, 255, 0.35); /* track del relleno, ya no naranja sólido */
+  border-color: var(--color-orange);
+}
+
+/* Relleno de progreso: anima en el mismo tiempo que el autoplay (5000ms)
+   para que el dot termine de llenarse justo cuando cambia la imagen. */
+.hero__dot.is-active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-orange);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: hero-dot-fill 5000ms linear forwards;
+}
+
+@keyframes hero-dot-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* .is-paused la agrega/saca js/main.js en sync con stop()/start() del
+   autoplay real — el relleno se congela en vez de resetear, y retoma
+   desde donde quedó al sacar el mouse (no vuelve a 0). */
+.hero__media.is-paused .hero__dot.is-active::after {
+  animation-play-state: paused;
+}
+
+@media (min-width: 768px) {
+  .hero__inner {
+    padding-block: var(--space-11) var(--space-10);
+  }
+
+  .hero__title {
+    font-size: 58px;
+    line-height: 1.03;
+    letter-spacing: -1.74px;
+  }
+
+  .hero__buttons {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero__buttons .btn--primary,
+  .hero__buttons .btn--outline {
+    width: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-10) var(--space-8) 120px var(--space-9);
+  }
+
+  .hero__content {
+    flex: 0 0 520px;
+    width: 520px;
+  }
+
+  .hero__media {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .hero__frame {
+    max-width: none;
+    aspect-ratio: 600 / 480;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__frame-image,
+  .hero__dot {
+    transition: none;
+  }
+
+  /* Con reduced-motion el autoplay está desactivado (ver js/main.js), así
+     que el relleno no debe arrancar en cero — queda lleno y estático. */
+  .hero__dot.is-active::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ==========================================================================
+   Frase destacada
+   ========================================================================== */
+.highlight {
+  background-color: var(--color-bg-tint-blue);
+}
+
+.highlight__inner {
+  padding-block: var(--space-11);
+}
+
+.highlight__text {
+  max-width: 50ch;
+  margin-inline: auto;
+  text-align: center;
+  font-size: var(--fs-lead-tablet);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  color: var(--color-text);
+}
+
+@media (min-width: 1280px) {
+  .highlight__text {
+    font-size: var(--fs-lead-desktop-lg);
+  }
+}
+
+/* ==========================================================================
+   Beneficios
+   ========================================================================== */
+.benefits {
+  background-color: transparent;
+}
+
+.benefits__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-9);
+}
+
+/* Estilo portado de styleguide.css (.sg-benefit), ya validado ahí. */
+.benefit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.benefit__title {
+  font-size: var(--fs-heading);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-text);
+}
+
+.benefit__text {
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .benefits__inner {
+    flex-direction: row;
+    gap: var(--space-8);
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-9);
+  }
+
+  .benefit {
+    flex: 1 1 0;
+  }
+}
+
+/* ==========================================================================
+   Instituciones que confían en MEDEX — ancla opaca (panel blanco): no deja
+   ver el fondo mesh detrás, a diferencia del resto de las secciones de Home.
+   ========================================================================== */
+.partners {
+  background-color: var(--color-white);
+}
+
+.partners__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: 96px; /* ningún token de base.css cae en el rango pedido (96–112px): space-10 es 80px, space-11 es 120px */
+}
+
+.partners__label {
+  font-size: var(--fs-lead-tablet);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+  text-align: center;
+}
+
+.partners__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3) var(--space-5);
+  width: 100%;
+}
+
+.partners__logos li {
+  padding: var(--space-4);
+}
+
+/* max-height (no height fija): logos con proporciones distintas mantienen
+   su relación de aspecto natural sin achicarse/distorsionarse. */
+.partners__logos img {
+  max-height: 64px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Carrusel automático en mobile — ≥768px queda intacto (sin viewport/wrap
+   propios, el clone oculto, grid original visible tal cual estaba). */
+.partners__logos--clone {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .partners__logos-viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .partners__logos-wrap {
+    display: flex;
+    width: max-content;
+    animation: partners-marquee 14s linear infinite;
+  }
+
+  .partners__logos,
+  .partners__logos--clone {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .partners__logos--clone {
+    display: flex;
+  }
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners__logos-wrap {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Título - frase para los servicios
+   ========================================================================== */
+.services-intro__inner {
+  padding-block: var(--space-5);
+}
+
+.services-intro__text {
+  max-width: 56ch;
+  font-size: var(--fs-lead-mobile);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-normal);
+  color: var(--color-text); /* negro — confirmado, NO azul */
+  border-left: 2px solid #DADADA; /* valor real de Figma (antes var(--color-border-strong), aproximado) */
+  padding-left: var(--space-6); /* 32px */
+}
+
+@media (min-width: 768px) {
+  .services-intro__text {
+    font-size: var(--fs-lead-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .services-intro__text {
+    font-size: var(--fs-lead-desktop);
+  }
+}
+
+/* ==========================================================================
+   Servicios
+   ========================================================================== */
+.services__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-block: var(--space-9);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+}
+
+.service-card:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-2px);
+}
+
+.service-card__image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Encuadre puntual — la 3ra card necesita el sujeto más arriba. */
+.service-card__image[src*="Cobertura_de_eventos"] {
+  object-position: 50% 85%;
+}
+
+.service-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: var(--space-6);
+  padding: var(--space-5);
+}
+
+.service-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.service-card__title {
+  font-size: var(--fs-heading);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-text);
+}
+
+.service-card__desc {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  line-height: var(--lh-snug);
+  color: var(--color-text-muted);
+}
+
+.service-card__link {
+  margin-top: auto;
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  color: var(--color-orange);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.service-card__link:hover {
+  color: var(--color-orange-hover);
+}
+
+@media (min-width: 768px) {
+  .services__inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-block: var(--space-11);
+  }
+
+  .service-card {
+    flex: 1 1 300px;
+    max-width: 363px;
+  }
+}

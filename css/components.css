@@ -1,0 +1,395 @@
+/*
+  MEDEX — Componentes compartidos entre páginas (botones, barra de CTA)
+*/
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  text-align: center;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn--primary {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-orange-hover);
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-blue);
+  padding: calc(var(--space-3) - 2px) calc(var(--space-4) - 2px);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-blue-hover);
+  color: var(--color-blue-hover);
+  transform: translateY(-1px);
+}
+
+.btn--outline:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Barra de CTA — Design System v2
+
+   Rediseño: fondo neutro (antes naranja sólido), un solo CTA primario (antes
+   dos: "Contactanos" en azul sobre naranja —bajo contraste— + botón). Mismo
+   tratamiento en todos los breakpoints (antes había una versión mobile con 1
+   link y otra desktop con 2). El wordmark MEDEX se sacó del diseño — ver nota
+   de cierre de esta ronda; el card queda headline → botón.
+
+   Decisión de fondo cerrada: blanco + border-top (no navy — ver
+   styleguide.html, sección cta-bar, para la comparación que se usó).
+
+   Ancho de card: 770px centrado (ver ronda de ajuste de wrap del headline;
+   el valor original confirmado por Figma era 640px).
+   ========================================================================== */
+.cta-bar {
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+
+.cta-bar__inner {
+  padding-block: var(--space-7); /* 40px, antes --space-5 (24px) */
+}
+
+@media (min-width: 768px) {
+  .cta-bar__inner {
+    padding-block: var(--space-9); /* 64px — mismo patrón que .services__inner/.highlight__inner */
+  }
+}
+
+.cta-bar__card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* el headline nuevo (punto 6) puede no entrar en una fila en mobile */
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: 640px;
+  margin-inline: auto;
+  padding: var(--space-4);
+  background-color: transparent;
+  border-radius: var(--radius-lg);
+}
+
+/* 2 bloques en una fila (≥768px): headline (flex:1) — botón. En mobile, el
+   headline ocupa toda la fila (flex-basis:100% fuerza el wrap) y queda
+   arriba; el botón solo cae debajo gracias al orden natural del DOM — no
+   hace falta ningún override de "order" (el wordmark que acompañaba al
+   botón en esa segunda fila se sacó del diseño). */
+.cta-bar__headline {
+  flex: 1 1 100%;
+  min-width: 0;
+  text-align: left;
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .cta-bar__headline {
+    flex: 1 1 0;
+    font-size: 22px;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Libera espacio horizontal para el headline a 22px sin volver a
+     achicarlo — ver nota de cierre sobre el resultado real con el copy
+     actual dentro del card de 640px. */
+  .cta-bar__card {
+    max-width: 770px;
+    gap: var(--space-3);
+  }
+}
+
+/* Escalón intermedio: en 768–1023px el copy actual no entra en una sola
+   línea a 22px (ancho de card insuficiente en esa franja) — 19px sí entra
+   en todo el rango salvo el extremo más angosto (768px exacto, donde se
+   acepta el wrap de 2 líneas). Desde 1024px el headline vuelve a 22px. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cta-bar__headline {
+    font-size: 19px;
+  }
+}
+
+/* Desde 1024px el wordmark ya no compite por espacio (se sacó del diseño),
+   así que el card puede volver a achicarse sin perder la línea única. */
+@media (min-width: 1024px) {
+  .cta-bar__card {
+    max-width: 700px;
+  }
+}
+
+.cta-bar__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-6);
+}
+
+/* "Contactanos" queda eliminado del diseño (redundante con el nav/bottom-nav
+   y fuente del problema de contraste azul-sobre-naranja). No se puede sacar
+   del HTML esta fase (ver nota de alcance arriba), así que se oculta acá en
+   todos los breakpoints en vez de solo en mobile. */
+.cta-bar__contact {
+  display: none !important;
+}
+
+.cta-bar__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.cta-bar__button:hover {
+  background-color: var(--color-orange-hover);
+}
+
+@media (min-width: 768px) {
+  .cta-bar__button {
+    padding-inline: var(--space-3);
+  }
+}
+
+/* Variante navy oscuro — alternativa a validar en el styleguide */
+.cta-bar--navy {
+  background-color: var(--color-navy);
+  border-top: none;
+}
+
+/* ==========================================================================
+   Hero de página interna (título + bajada opcional sobre fondo celeste)
+   Usado en /presupuestos y /contacto.
+   ========================================================================== */
+.hero-quote__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-9);
+  text-align: center;
+}
+
+.hero-quote__title {
+  font-size: var(--fs-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text);
+}
+
+.hero-quote__subtitle {
+  max-width: 56ch;
+  font-size: var(--fs-heading);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.12px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .hero-quote__inner {
+    padding-block: var(--space-11);
+  }
+}
+
+/* ==========================================================================
+   Campos de formulario (inputs/textarea) y mensaje de estado de envío
+   Usado en /presupuestos y /contacto.
+   ========================================================================== */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.form-field label {
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-text);
+}
+
+.form-field .optional {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease;
+}
+
+.form-field textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: var(--font-family-base);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--color-blue);
+}
+
+.form-status {
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-status--success {
+  color: #1b7f3a;
+}
+
+.form-status--error {
+  color: #d64545;
+}
+
+/* ==========================================================================
+   Header sticky — sombra al hacer scroll
+   La clase .is-scrolled la agrega js/main.js. El position:sticky y el resto
+   del comportamiento del header (logo-only en mobile, etc.) viven en
+   css/site.css, fuera del alcance de esta fase — ver demo completa en
+   styleguide.html. Esta regla sola es inofensiva en las páginas reales: sin
+   sticky, el header ya no está en pantalla cuando scrollY > 0 en páginas
+   largas, así que el shadow no se llega a notar hasta que se aplique sticky.
+   ========================================================================== */
+.site-header.is-scrolled {
+  box-shadow: var(--shadow-header);
+}
+
+/* ==========================================================================
+   Bottom nav (mobile, <768px) — Design System v2.
+   Ya insertado en las 5 páginas reales (antes de </body>). El clearance de
+   --bottom-nav-height en el <body> y el reposicionamiento del botón de
+   WhatsApp viven en site.css.
+   ========================================================================== */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: var(--color-white);
+  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 767px) {
+  .bottom-nav {
+    display: block;
+  }
+}
+
+.bottom-nav__list {
+  display: flex;
+  align-items: stretch;
+  height: var(--bottom-nav-height);
+}
+
+/* El flex item real es el <li> (hijo directo de .bottom-nav__list, que es
+   el display:flex) — .bottom-nav__item es el <a> DENTRO del <li>, así que
+   necesita min-width:0 acá, no en el <a>, para repartirse parejo. */
+.bottom-nav__list li {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.bottom-nav__item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+  text-align: center;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.bottom-nav__item svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.bottom-nav__item span {
+  white-space: nowrap; /* evita que el overflow-wrap global de body encoja la columna por debajo del ancho natural del label */
+}
+
+.bottom-nav__item:hover,
+.bottom-nav__item.is-active {
+  color: var(--color-orange);
+}
+
+/* ==========================================================================
+   Encabezado de sección (H2) — unifica el estilo repetido entre páginas
+   internas. Mismo tratamiento que .highlight__text en home.css.
+   ========================================================================== */
+.section-heading {
+  font-size: var(--fs-lead-tablet);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  color: var(--color-text);
+}
+
+@media (min-width: 1280px) {
+  .section-heading {
+    font-size: var(--fs-lead-desktop-lg);
+  }
+}

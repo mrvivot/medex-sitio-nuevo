@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Styleguide — MEDEX Design System v2</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/styleguide.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       Header sticky — demo real: scrolleá la página para ver aparecer la
+       sombra (.is-scrolled, agregada por js/main.js). En <768px mostrá solo
+       el logo (sin nav) — la nav completa vive en el bottom nav, más abajo.
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a href="index.html" class="site-header__logo" aria-label="MEDEX - Inicio">
+        <img src="img/logo-medex.png" alt="MEDEX">
+      </a>
+      <nav class="site-header__nav" aria-label="Navegación principal">
+        <a href="servicios.html">Servicios</a>
+        <a href="presupuestos.html">Presupuestos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="sg-intro">
+      <div class="container">
+        <h1>Design System v2 — Styleguide</h1>
+        <p>Herramienta de validación de Fase 2. No está linkeada desde el nav real del sitio. El bottom nav, el wordmark two-tone del cta-bar y el footer navy ya se aplicaron a las 5 páginas reales (cierre de Fase 1 del Design System v2) — quedan marcados acá con <strong>✅ Decisión cerrada</strong>. Las cards de beneficio/servicio siguen siendo preview nomás (<code>css/home.css</code> todavía no se tocó).</p>
+      </div>
+    </section>
+
+    <div class="sg-scroll-hint">↓ Scrolleá para ver la sombra del header sticky ↓</div>
+
+    <!-- ====================================================================
+         1. Paleta de colores
+         ==================================================================== -->
+    <section class="sg-section" id="colores">
+      <div class="container">
+        <span class="sg-section__label">Tokens</span>
+        <h2>Paleta de colores</h2>
+        <p class="sg-section__note">Incluye el fix de contraste de <code>--color-text-muted-alt</code>: antes <code>rgba(100,102,110,.55)</code> medía <strong>2.08:1</strong> sobre el fondo del hero (falla AA), el nuevo valor <code>#5B5F6B</code> da <strong>4.98:1</strong> (pasa AA). Comparación lado a lado abajo.</p>
+
+        <div class="sg-swatch" style="max-width: 420px; margin-bottom: var(--space-8);">
+          <div class="sg-swatch__fill" style="height:auto; display:flex;">
+            <div style="flex:1; padding: var(--space-5); background: var(--color-bg-hero-blue);">
+              <div style="font-size:13px; color:#333; margin-bottom:8px;">Antes (falla AA · 2.08:1)</div>
+              <div style="color: rgba(100,102,110,.55); font-weight:600;">Somos una empresa dedicada a la salud</div>
+            </div>
+            <div style="flex:1; padding: var(--space-5); background: var(--color-bg-hero-blue);">
+              <div style="font-size:13px; color:#333; margin-bottom:8px;">Ahora (pasa AA · 4.98:1)</div>
+              <div style="color: var(--color-text-muted-alt); font-weight:600;">Somos una empresa dedicada a la salud</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sg-subhead">Marca</div>
+        <div class="sg-color-grid">
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-blue)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-blue</span><span class="sg-swatch__value">#4B64AB</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-blue-deep)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-blue-deep</span><span class="sg-swatch__value">#3053B6</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-blue-hover)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-blue-hover</span><span class="sg-swatch__value">#3E538F · nuevo</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-navy)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-navy</span><span class="sg-swatch__value">#08267A</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-orange)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-orange</span><span class="sg-swatch__value">#F6863A</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-orange-hover)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-orange-hover</span><span class="sg-swatch__value">#E2762B · nuevo</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-orange-light)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-orange-light</span><span class="sg-swatch__value">rgba(255,185,137,.9)</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-focus-ring)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-focus-ring</span><span class="sg-swatch__value">#3053B6 · nuevo</span></div></div>
+        </div>
+
+        <div class="sg-subhead">Neutros y texto</div>
+        <div class="sg-color-grid">
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-black)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-black</span><span class="sg-swatch__value">#000000</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-white); border-bottom:1px solid var(--color-border)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-white</span><span class="sg-swatch__value">#FFFFFF</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-text-muted)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-text-muted</span><span class="sg-swatch__value">rgba(0,0,0,.55)</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-text-muted-alt)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-text-muted-alt</span><span class="sg-swatch__value">#5B5F6B · corregido</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-border-strong)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-border-strong</span><span class="sg-swatch__value">rgba(0,0,0,.15)</span></div></div>
+        </div>
+
+        <div class="sg-subhead">Fondos de sección</div>
+        <div class="sg-color-grid">
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-bg-tint-blue)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-bg-tint-blue</span><span class="sg-swatch__value">rgba(48,83,182,.16)</span></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__fill" style="background:var(--color-bg-hero-blue)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">--color-bg-hero-blue</span><span class="sg-swatch__value">#E3EFFF</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. Escala tipográfica
+         ==================================================================== -->
+    <section class="sg-section" id="tipografia">
+      <div class="container">
+        <span class="sg-section__label">Tokens</span>
+        <h2>Escala tipográfica</h2>
+        <p class="sg-section__note">Incluye los 4 tokens nuevos de "frase destacada" (<code>--fs-lead-*</code>), que reemplazan los tamaños hardcodeados de <code>.services-intro__text</code> (28px suelto → ahora 24px en desktop vía <code>--fs-lead-desktop</code>) y <code>.highlight__text</code> (antes <code>clamp(28px,5vw,40px)</code> suelto → ahora <code>--fs-lead-mobile/tablet/desktop-lg</code>).</p>
+
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-display</strong>64px / 44px mobile</div><div class="sg-type-row__sample" style="font-size:var(--fs-display)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-logo</strong>56px / 40px mobile</div><div class="sg-type-row__sample" style="font-size:var(--fs-logo)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-lead-desktop-lg</strong>32px · nuevo</div><div class="sg-type-row__sample" style="font-size:var(--fs-lead-desktop-lg)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-lead-tablet</strong>28px · nuevo</div><div class="sg-type-row__sample" style="font-size:var(--fs-lead-tablet)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-heading</strong>24px</div><div class="sg-type-row__sample" style="font-size:var(--fs-heading)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-lead-desktop</strong>24px · nuevo (antes 28px)</div><div class="sg-type-row__sample" style="font-size:var(--fs-lead-desktop)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-lead-mobile</strong>22px · nuevo</div><div class="sg-type-row__sample" style="font-size:var(--fs-lead-mobile)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-logo-compact</strong>20px</div><div class="sg-type-row__sample" style="font-size:var(--fs-logo-compact)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-body-lg</strong>18px</div><div class="sg-type-row__sample" style="font-size:var(--fs-body-lg)">Aa</div></div>
+        <div class="sg-type-row"><div class="sg-type-row__meta"><strong>--fs-body</strong>16px</div><div class="sg-type-row__sample" style="font-size:var(--fs-body)">Aa</div></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. Escala de espaciado
+         ==================================================================== -->
+    <section class="sg-section" id="espaciado">
+      <div class="container">
+        <span class="sg-section__label">Tokens</span>
+        <h2>Escala de espaciado</h2>
+        <p class="sg-section__note">Sin cambios esta fase — se muestra completa como referencia.</p>
+
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-1 · 4px</div><div class="sg-space-row__bar" style="width:var(--space-1)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-2 · 8px</div><div class="sg-space-row__bar" style="width:var(--space-2)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-3 · 12px</div><div class="sg-space-row__bar" style="width:var(--space-3)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-4 · 16px</div><div class="sg-space-row__bar" style="width:var(--space-4)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-5 · 24px</div><div class="sg-space-row__bar" style="width:var(--space-5)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-6 · 32px</div><div class="sg-space-row__bar" style="width:var(--space-6)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-7 · 40px</div><div class="sg-space-row__bar" style="width:var(--space-7)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-8 · 48px</div><div class="sg-space-row__bar" style="width:var(--space-8)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-9 · 64px</div><div class="sg-space-row__bar" style="width:var(--space-9)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-10 · 80px</div><div class="sg-space-row__bar" style="width:var(--space-10)"></div></div>
+        <div class="sg-space-row"><div class="sg-space-row__label">--space-11 · 120px</div><div class="sg-space-row__bar" style="width:var(--space-11)"></div></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. Botones
+         ==================================================================== -->
+    <section class="sg-section" id="botones">
+      <div class="container">
+        <span class="sg-section__label">Componente · components.css</span>
+        <h2>Botones</h2>
+        <p class="sg-section__note">Ya aplicado en las 5 páginas reales (comparten <code>components.css</code>). Nuevo: estados <code>:hover</code> con <code>--color-orange-hover</code> / <code>--color-blue-hover</code> y transición de <code>--duration-fast</code>. La columna derecha de cada par "pinta" el estado hover sin necesitar mouse.</p>
+
+        <div class="sg-btn-grid">
+          <div class="sg-btn-pair">
+            <span class="sg-btn-pair__label">Primario — normal / hover</span>
+            <div style="display:flex; gap:var(--space-3);">
+              <a href="#" class="btn btn--primary" onclick="return false">Pedí un presupuesto</a>
+              <a href="#" class="btn btn--primary sg-force-hover" onclick="return false">Pedí un presupuesto</a>
+            </div>
+          </div>
+          <div class="sg-btn-pair">
+            <span class="sg-btn-pair__label">Outline — normal / hover</span>
+            <div style="display:flex; gap:var(--space-3);">
+              <a href="#" class="btn btn--outline" onclick="return false">Conocé nuestros servicios</a>
+              <a href="#" class="btn btn--outline sg-force-hover" onclick="return false">Conocé nuestros servicios</a>
+            </div>
+          </div>
+          <div class="sg-btn-pair">
+            <span class="sg-btn-pair__label">Link terciario de card — normal / hover</span>
+            <div style="display:flex; gap:var(--space-5); align-items:center;">
+              <a href="#" class="sg-service-link" onclick="return false">Conocé más detalles →</a>
+              <a href="#" class="sg-service-link sg-force-hover" onclick="return false">Conocé más detalles →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. Cards de beneficio y de servicio
+         ==================================================================== -->
+    <section class="sg-section" id="cards">
+      <div class="container">
+        <span class="sg-section__label">Preview · hoy vive en css/home.css</span>
+        <h2>Cards de beneficio y de servicio</h2>
+        <p class="sg-section__note"><strong>No aplicado todavía en index.html</strong> — <code>.benefit</code> y <code>.service-card</code> viven en <code>css/home.css</code>, fuera del alcance de archivos de esta fase. Acá se preview con clases <code>.sg-*</code> aparte, listas para portar 1:1 a home.css cuando se apruebe.</p>
+
+        <div class="sg-subhead">Card de beneficio — ahora con contenedor real (bg blanco, radius, shadow, padding)</div>
+        <div class="sg-card-grid" style="margin-bottom: var(--space-9);">
+          <div class="sg-benefit">
+            <h3 class="sg-benefit__title">Atención personalizada</h3>
+            <p class="sg-benefit__text">Líneas de emergencias atendidas por operadores calificados para poder asesorar, prevenir y atender las necesidades de cada colegio.</p>
+          </div>
+          <div class="sg-benefit">
+            <h3 class="sg-benefit__title">Profesionales capacitados</h3>
+            <p class="sg-benefit__text">Médicos, paramédicos y personal de ambulancia con formación en RCP, DEA y primeros auxilios.</p>
+          </div>
+          <div class="sg-benefit">
+            <h3 class="sg-benefit__title">Unidades móviles a tu alcance</h3>
+            <p class="sg-benefit__text">Flota de móviles de respuesta rápida y unidades de media y alta complejidad (UTIM).</p>
+          </div>
+        </div>
+
+        <div class="sg-subhead">Card de servicio — link "Conocé más detalles →" ahora en naranja (antes negro)</div>
+        <div class="sg-card-grid">
+          <article class="sg-service-card">
+            <div class="sg-service-card__image">[ imagen ]</div>
+            <div class="sg-service-card__body">
+              <h3 class="sg-service-card__title">Emergencias Médicas y Área Protegida</h3>
+              <p class="sg-service-card__desc">Atendemos todas las emergencias ocurridas dentro de cada institución.</p>
+              <a href="#" class="sg-service-link" onclick="return false">Conocé más detalles →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. Bottom nav (mobile)
+         ==================================================================== -->
+    <section class="sg-section" id="bottom-nav">
+      <div class="container">
+        <span class="sg-section__label">Componente · components.css</span>
+        <h2>Bottom nav (mobile, &lt;768px)</h2>
+        <p class="sg-section__note"><strong>Ya insertado en las 5 páginas reales</strong>, antes de <code>&lt;/body&gt;</code>. Simulado acá en un frame de 375px de ancho para no depender del ancho real del navegador. El ítem activo se pinta en <code>--color-orange</code> vía la misma lógica de <code>.is-active</code> que ya usa el header/footer (sin cambios en main.js). El <code>&lt;body&gt;</code> y el botón de WhatsApp tienen clearance agregado en site.css para no quedar tapados.</p>
+
+        <div class="sg-mobile-frame">
+          <div class="sg-mobile-frame__content">
+            <p><strong>Simulación de viewport mobile (375px)</strong></p>
+            <p style="margin-top:8px;">El header de arriba y el bottom nav de acá abajo son el mismo componente que aparecería en una página real en mobile.</p>
+          </div>
+          <nav class="bottom-nav" aria-label="Navegación mobile">
+            <ul class="bottom-nav__list">
+              <li><a href="index.html" class="bottom-nav__item is-active">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 9.5V21H19V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9.5 21V14H14.5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Inicio</span>
+              </a></li>
+              <li><a href="servicios.html" class="bottom-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Servicios</span>
+              </a></li>
+              <li><a href="presupuestos.html" class="bottom-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 3H14L18 7V21H7V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 3V7H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 12H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 15.5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 9H11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Presupuestos</span>
+              </a></li>
+              <li><a href="nosotros.html" class="bottom-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="9" cy="7.5" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2.5 20C2.5 16.5 5.2 14 9 14C12.8 14 15.5 16.5 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="17" cy="8.5" r="2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15.3 14.2C18.2 14.6 20.3 16.6 20.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Nosotros</span>
+              </a></li>
+              <li><a href="contacto.html" class="bottom-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 5H20V19H4V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4 6.5L12 13L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Contacto</span>
+              </a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. cta-bar
+         ==================================================================== -->
+    <section class="sg-section" id="cta-bar">
+      <div class="container">
+        <span class="sg-section__label">Componente · components.css</span>
+        <h2>Barra de CTA</h2>
+        <p class="sg-section__note">Ya aplicada en las 3 páginas que tienen cta-bar (index, servicios, contacto — presupuestos y nosotros no tienen esta sección). Wordmark two-tone real con markup nuevo (<code>.cta-bar__brand-m</code> / <code>-edex</code>). Un solo CTA — se eliminó "Contactanos".</p>
+        <div class="sg-decision-closed">✅ Decisión cerrada: fondo blanco (Variante A). Ya aplicado en las 5 páginas reales.</div>
+
+        <div class="sg-cta-stack" style="margin-top: var(--space-6);">
+          <div>
+            <div class="sg-footer-option__label">Variante A — blanco (default actual en components.css)</div>
+            <section class="cta-bar">
+              <div class="cta-bar__inner container">
+                <div class="cta-bar__card">
+                  <span class="cta-bar__brand"><span class="cta-bar__brand-m">M</span><span class="cta-bar__brand-edex">EDEX</span></span>
+                  <div class="cta-bar__actions">
+                    <a href="#" class="cta-bar__button" onclick="return false">Pedí un presupuesto</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div>
+            <div class="sg-footer-option__label">Variante B — navy oscuro (.cta-bar--navy)</div>
+            <section class="cta-bar cta-bar--navy">
+              <div class="cta-bar__inner container">
+                <div class="cta-bar__card">
+                  <span class="cta-bar__brand"><span class="cta-bar__brand-m">M</span><span class="cta-bar__brand-edex">EDEX</span></span>
+                  <div class="cta-bar__actions">
+                    <a href="#" class="cta-bar__button" onclick="return false">Pedí un presupuesto</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. Footer
+         ==================================================================== -->
+    <section class="sg-section" id="footer" style="border-bottom:none;">
+      <div class="container">
+        <span class="sg-section__label">Componente · css/site.css</span>
+        <h2>Footer</h2>
+        <p class="sg-section__note"><strong>Ya aplicado en las 5 páginas reales</strong> — <code>.site-footer</code> real en <code>css/site.css</code> ahora usa el fondo navy (única variante, no coexiste con la gris clara). El padding ya usaba <code>--space-9</code> vertical y <code>--space-6</code> entre bloques (consistente con la escala); lo que faltaba era fondo propio para "respirar" como sección aparte. De yapa: los íconos de Instagram/Facebook (gris oscuro, pensados para fondo claro) se fuerzan a blanco con <code>filter</code> porque se cargan por <code>&lt;img&gt;</code> y no heredan <code>currentColor</code>.</p>
+        <div class="sg-decision-closed">✅ Decisión cerrada: navy oscuro (Variante B). Ya aplicado en las 5 páginas reales.</div>
+
+        <div class="sg-footer-grid" style="margin-top: var(--space-6);">
+          <div>
+            <div class="sg-footer-option__label">Variante A — gris claro + border-top</div>
+            <footer class="sg-site-footer sg-site-footer--light">
+              <span class="sg-site-footer__brand"><span style="color:var(--color-blue)">M</span><span style="color:var(--color-orange)">EDEX</span></span>
+              <nav class="sg-site-footer__nav">
+                <a href="#" onclick="return false">Servicios</a>
+                <a href="#" onclick="return false">Presupuestos</a>
+                <a href="#" onclick="return false">Nosotros</a>
+                <a href="#" onclick="return false">Contacto</a>
+              </nav>
+              <div class="sg-site-footer__contrast">texto muted sobre este fondo: contraste OK (gris #444 sobre #f7f7f8)</div>
+            </footer>
+          </div>
+          <div>
+            <div class="sg-footer-option__label">Variante B — navy oscuro</div>
+            <footer class="sg-site-footer sg-site-footer--navy">
+              <span class="sg-site-footer__brand"><span class="sg-site-footer__brand-m">M</span><span class="sg-site-footer__brand-edex">EDEX</span></span>
+              <nav class="sg-site-footer__nav">
+                <a href="#" onclick="return false">Servicios</a>
+                <a href="#" onclick="return false">Presupuestos</a>
+                <a href="#" onclick="return false">Nosotros</a>
+                <a href="#" onclick="return false">Contacto</a>
+              </nav>
+              <div class="sg-site-footer__contrast">links en rgba(255,255,255,.78) sobre #08267A: contraste real ≈ 7.8:1 (AAA)</div>
+            </footer>
+          </div>
+        </div>
+        <p class="sg-section__note" style="margin-top: var(--space-6);">En mobile, cuando el bottom nav esté activo en las páginas reales, el footer (y el <code>&lt;body&gt;</code>) van a necesitar <code>padding-bottom: var(--bottom-nav-height)</code> para no quedar tapados — esa regla se agrega junto con el markup del bottom nav en la próxima fase.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

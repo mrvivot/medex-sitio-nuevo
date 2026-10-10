@@ -1,0 +1,13 @@
+# Credenciales reales — nunca se suben al repositorio
+mail/config.php
+
+# Dependencias instaladas vía Composer (si el hosting lo soporta)
+/vendor/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/

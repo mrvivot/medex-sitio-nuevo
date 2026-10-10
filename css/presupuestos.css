@@ -1,0 +1,116 @@
+/*
+  MEDEX — Página Presupuestos (presupuestos.html)
+  Fuente del hero: Figma (fileKey gIm4DeWsaXx2TcLVOV7905, node 30:1786 — sección "Hero 1").
+  El formulario NO sale del Figma (ese mockup es un borrador a descartar, según
+  indicación del cliente): son los 8 campos del sitio actual, reestilizados con
+  el sistema de diseño (colores, tipografía, inputs).
+*/
+
+/* ==========================================================================
+   Formulario de presupuesto
+   (".hero-quote", ".form-field" y ".form-status" están en components.css)
+   ========================================================================== */
+.budget {
+  display: flex;
+  justify-content: center;
+}
+
+.budget__inner {
+  width: 100%;
+  max-width: 800px;
+  padding-top: 0;
+  padding-bottom: var(--space-9);
+}
+
+@media (min-width: 768px) {
+  .budget__inner {
+    padding-bottom: var(--space-11);
+  }
+}
+
+.budget-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.budget-form__submit {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.budget-form__submit .btn {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .budget-form {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--space-8);
+  }
+
+  .budget-form__submit {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .budget-form__submit .btn {
+    width: auto;
+  }
+}
+
+/* ==========================================================================
+   Floating label — label como placeholder dentro del campo, sube arriba
+   al enfocar o al tener contenido. Scoped a .budget-form para no afectar
+   el formulario de /contacto, que comparte .form-field pero no este patrón.
+   ========================================================================== */
+.budget-form .form-field {
+  position: relative;
+}
+
+.budget-form .form-field label {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-3);
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 1;
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 0.15s ease, color 0.15s ease, top 0.15s ease;
+}
+
+.budget-form .form-field input:focus + label,
+.budget-form .form-field input:not(:placeholder-shown) + label,
+.budget-form .form-field textarea:focus + label,
+.budget-form .form-field textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  transform: scale(0.75);
+  color: var(--color-text-muted);
+  background-color: var(--color-white);
+  padding-inline: 4px;
+  margin-left: -4px;
+}
+
+.budget-form .form-field__hint {
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  margin: 0;
+}

@@ -1,0 +1,320 @@
+/*
+  MEDEX — Página Contacto (contacto.html)
+  Sin formulario: el Figma de esta página no incluye uno y el cliente no lo
+  solicitó. Contenido reorganizado por prioridad/urgencia del usuario:
+  1) Contacto telefónico (Emergencias destacada + Oficina)
+  2) Derivaciones y autorizaciones
+  3) Redes + Ubicación (menor jerarquía, agrupadas al cierre)
+*/
+
+/* ==========================================================================
+   Hero: ver ".hero-quote" en components.css
+   ========================================================================== */
+
+/* ==========================================================================
+   Contacto telefónico (Emergencias + Oficina)
+   ========================================================================== */
+.phone-contact__inner {
+  padding-top: 0;
+  padding-bottom: var(--space-9);
+}
+
+@media (min-width: 768px) {
+  .phone-contact__inner {
+    padding-bottom: var(--space-11);
+  }
+}
+
+.phone-contact__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .phone-contact__grid {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .phone-contact__grid .channel-card--urgent {
+    flex: 3 1 0;
+  }
+
+  .phone-contact__grid .channel-card:not(.channel-card--urgent) {
+    flex: 2 1 0;
+  }
+}
+
+.channel-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+}
+
+.channel-card:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-2px);
+}
+
+.channel-card--urgent {
+  background-color: rgba(246, 134, 58, 0.08);
+  border: 2px solid var(--color-orange);
+}
+
+.channel-card__title {
+  font-size: 20px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.1px;
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+}
+
+.channel-card__hours {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.channel-card__prefix {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.channel-card__numbers {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-card__number {
+  display: block;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 24px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.12px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.channel-card__number:first-child {
+  padding-top: 0;
+}
+
+.channel-card__number:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.channel-card__number:hover,
+.channel-card__number:focus-visible {
+  color: var(--color-orange);
+}
+
+.channel-card__networks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.channel-card__network-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.channel-card__network-row img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.channel-card__network-row span,
+.channel-card__network-row a.channel-card__network-link {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 24px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.channel-card__network-link {
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.channel-card__network-link--instagram {
+  color: var(--color-orange) !important;
+}
+
+.channel-card__network-link--facebook {
+  color: #0866ff !important;
+}
+
+.channel-card__network-link--whatsapp {
+  color: #25d366 !important;
+}
+
+/* ==========================================================================
+   Derivaciones y autorizaciones
+   ========================================================================== */
+.referrals__title {
+  max-width: 30ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.referrals {
+  background-color: var(--color-orange-light);
+}
+
+.referrals__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-9);
+}
+
+@media (min-width: 768px) {
+  .referrals__inner {
+    padding-block: var(--space-11);
+  }
+}
+
+.referrals-card {
+  width: 100%;
+  max-width: 800px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+}
+
+.referrals-card:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-2px);
+}
+
+.referrals-card__text {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+}
+
+.referrals-card__phone {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.referrals-card__phone svg,
+.referrals-card__phone img {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.referrals-card__phone a {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-lg);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.referrals-card__phone a:hover,
+.referrals-card__phone a:focus-visible {
+  color: var(--color-orange);
+}
+
+/* ==========================================================================
+   Cierre: Correo y Redes + Ubicación (menor jerarquía, agrupadas)
+   ========================================================================== */
+.secondary-contact__inner {
+  padding-block: var(--space-9);
+}
+
+@media (min-width: 1280px) {
+  .secondary-contact__inner {
+    padding-block: var(--space-11);
+  }
+}
+
+.secondary-contact__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1280px) {
+  .secondary-contact__grid {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-9);
+  }
+
+  .secondary-contact__grid > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.location__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.location__address {
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.1px;
+  line-height: var(--lh-normal);
+  color: var(--color-text-muted);
+}
+
+.location__map {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.location__map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
