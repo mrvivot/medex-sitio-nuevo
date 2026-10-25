@@ -209,12 +209,6 @@
   }
 }
 
-  .site-footer__brand {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-9);
-  }
-
 /* ==========================================================================
    Botón flotante de WhatsApp
    Mismo patrón que el sitio actual (enlace directo, botón circular fijo).
