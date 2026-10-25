@@ -23,14 +23,38 @@
 }
 
 .site-header__logo {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   flex-shrink: 0;
 }
 
 .site-header__logo img {
   display: block;
-  height: 40px;
+  height: 48px;
   width: auto;
+  flex-shrink: 0;
+}
+
+.site-header__wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.site-header__wordmark-extra {
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.site-header__tagline {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 /* Oculta en mobile: duplicaba la navegación que ya cubre el bottom nav
@@ -62,12 +86,26 @@
     justify-content: space-between;
   }
 
+  .site-header__nav {
+    display: flex;
+    gap: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
   .site-header__logo img {
-    height: 56px;
+    height: 64px;
+  }
+
+  .site-header__wordmark-extra {
+    font-size: var(--fs-body-lg);
+  }
+
+  .site-header__tagline {
+    font-size: var(--fs-body);
   }
 
   .site-header__nav {
-    display: flex;
     gap: var(--space-7);
   }
 }
@@ -170,6 +208,12 @@
     gap: var(--space-6);
   }
 }
+
+  .site-footer__brand {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-9);
+  }
 
 /* ==========================================================================
    Botón flotante de WhatsApp

@@ -394,33 +394,26 @@
   object-fit: contain;
 }
 
-/* Carrusel automático en mobile — ≥768px queda intacto (sin viewport/wrap
-   propios, el clone oculto, grid original visible tal cual estaba). */
-.partners__logos--clone {
-  display: none;
+/* Carrusel automático en todos los breakpoints. */
+.partners__logos-viewport {
+  width: 100%;
+  overflow: hidden;
 }
 
-@media (max-width: 767px) {
-  .partners__logos-viewport {
-    width: 100%;
-    overflow: hidden;
-  }
+.partners__logos-wrap {
+  display: flex;
+  width: max-content;
+  animation: partners-marquee 14s linear infinite;
+}
 
-  .partners__logos-wrap {
-    display: flex;
-    width: max-content;
-    animation: partners-marquee 14s linear infinite;
-  }
+.partners__logos,
+.partners__logos--clone {
+  display: flex;
+  flex-wrap: nowrap;
+}
 
-  .partners__logos,
-  .partners__logos--clone {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .partners__logos--clone {
-    display: flex;
-  }
+.partners__logos--clone {
+  display: flex;
 }
 
 @keyframes partners-marquee {
@@ -435,6 +428,12 @@
 @media (prefers-reduced-motion: reduce) {
   .partners__logos-wrap {
     animation: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .partners__logos img {
+    max-height: 80px;
   }
 }
 

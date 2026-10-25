@@ -46,7 +46,7 @@ $cuerpo = '<table align="center" style="border-color: #666;" cellpadding="10">
 <td>' . $nombre . '</td>
 </tr>
 <tr>
-<td><strong>Nombre de la empresa:</strong></td>
+<td><strong>Nombre de la institución:</strong></td>
 <td>' . $nombreEmpresa . '</td>
 </tr>
 <tr>
@@ -66,7 +66,7 @@ $cuerpo = '<table align="center" style="border-color: #666;" cellpadding="10">
 <td>' . $direccion . '</td>
 </tr>
 <tr>
-<td><strong>Cantidad de empleados:</strong></td>
+<td><strong>Cantidad de personas a cubrir:</strong></td>
 <td>' . $empleados . '</td>
 </tr>
 <tr>

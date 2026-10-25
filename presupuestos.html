@@ -16,8 +16,12 @@
 
   <header class="site-header">
     <div class="site-header__inner container">
-      <a href="index.html" class="site-header__logo" aria-label="MEDEX - Inicio">
+      <a href="index.html" class="site-header__logo">
         <img src="img/logo-medex.png" alt="MEDEX">
+        <span class="site-header__wordmark">
+          <span class="site-header__wordmark-extra">Medicall Express</span>
+          <span class="site-header__tagline">Servicios de Protección Médica</span>
+        </span>
       </a>
       <nav class="site-header__nav" aria-label="Navegación principal">
         <a href="servicios.html">Servicios</a>
@@ -48,7 +52,7 @@
 
           <div class="form-field">
             <input type="text" id="nombre_empresa" name="nombre_empresa" autocomplete="organization" placeholder=" " required>
-            <label for="nombre_empresa">Nombre de la empresa</label>
+            <label for="nombre_empresa">Nombre de la institución</label>
           </div>
 
           <div class="form-field">
@@ -78,8 +82,8 @@
           </div>
 
           <div class="form-field">
-            <input type="text" id="empleados" name="empleados" placeholder=" ">
-            <label for="empleados">Cantidad de empleados <span class="optional">(opcional)</span></label>
+            <input type="text" id="empleados" name="empleados" placeholder=" " required>
+            <label for="empleados">Cantidad de personas a cubrir (alumnos y personal institucional)</label>
           </div>
 
           <div class="form-field form-field--full">

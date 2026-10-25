@@ -28,7 +28,7 @@
   --color-border-strong: rgba(0, 0, 0, 0.15);
 
   /* --- Color: fondos de sección --- */
-  --color-bg: var(--color-white);
+  --color-bg: #F3F5FB;
   --color-bg-tint-blue: rgba(48, 83, 182, 0.16);   /* hero / franjas destacadas */
   --color-bg-tint-blue-transparent: rgba(48, 83, 182, 0); /* extremo de degradés con --color-bg-tint-blue */
 
