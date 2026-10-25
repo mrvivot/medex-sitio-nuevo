@@ -63,10 +63,10 @@
 
 .hero-services__title {
   max-width: 16ch;
-  font-size: var(--fs-display-mobile);
+  font-size: var(--fs-display);
   font-weight: var(--font-weight-bold);
   line-height: var(--lh-tight);
-  letter-spacing: var(--tracking-display-mobile);
+  letter-spacing: var(--tracking-display);
   color: var(--color-white);
 }
 
@@ -113,9 +113,6 @@
 @media (min-width: 1280px) {
   .hero-services {
     min-height: 680px;
-  }
-  .hero-services__title {
-    font-size: var(--fs-display);
   }
   .hero-services__buttons {
     flex-direction: row;

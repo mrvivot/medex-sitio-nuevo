@@ -40,13 +40,10 @@
 
 .hero__title {
   max-width: 46ch;
-  /* 40px propio de Home — NO var(--fs-display-mobile) (34px, compartido
-     con servicios.css/nosotros.css/components.css, todavía sin rediseñar;
-     subir ese token movería esas páginas fuera de alcance). */
-  font-size: var(--fs-logo-mobile);
+  font-size: var(--fs-display);
   font-weight: var(--font-weight-bold);
   line-height: var(--lh-tight);
-  letter-spacing: var(--tracking-display-mobile);
+  letter-spacing: var(--tracking-display);
   color: #111318;
 }
 
@@ -208,12 +205,6 @@
 @media (min-width: 768px) {
   .hero__inner {
     padding-block: var(--space-11) var(--space-10);
-  }
-
-  .hero__title {
-    font-size: 58px;
-    line-height: 1.03;
-    letter-spacing: -1.74px;
   }
 
   .hero__buttons {
