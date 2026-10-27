@@ -380,7 +380,7 @@
 /* max-height (no height fija): logos con proporciones distintas mantienen
    su relación de aspecto natural sin achicarse/distorsionarse. */
 .partners__logos img {
-  max-height: 64px;
+  height: 64px;
   width: auto;
   object-fit: contain;
 }
@@ -424,7 +424,7 @@
 
 @media (min-width: 768px) {
   .partners__logos img {
-    max-height: 80px;
+    height: 80px;
   }
 }
 
