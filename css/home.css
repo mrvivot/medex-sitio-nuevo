@@ -377,8 +377,9 @@
   padding: var(--space-4);
 }
 
-/* max-height (no height fija): logos con proporciones distintas mantienen
-   su relación de aspecto natural sin achicarse/distorsionarse. */
+/* height fija (no max-height): estandariza la altura de los 9 logos aunque
+   su resolución nativa sea distinta. width:auto + object-fit:contain
+   preserva la relación de aspecto de cada uno sin distorsionarlo. */
 .partners__logos img {
   height: 64px;
   width: auto;
